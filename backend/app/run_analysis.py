@@ -19,7 +19,7 @@ def run_and_save_analysis(year: int):
                 json.dump(results, f, indent=2)
             print(f"✅ Successfully saved analysis for {year} to {output_file}")
         else:
-            print(f"⚠️ No wet race data found for {year}. No file created.")
+            print(f"⚠️ No wet session data found for {year}. No file created.")
     except Exception as e:
         print(f"❌ An error occurred during analysis for {year}: {e}")
 
