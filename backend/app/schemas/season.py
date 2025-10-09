@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Dict, Any
 
 class DriverSeasonPerformance(BaseModel):
     rank: int
@@ -13,3 +13,7 @@ class DriverSeasonPerformance(BaseModel):
 class SeasonAnalysisResponse(BaseModel):
     season: int
     standings: List[DriverSeasonPerformance]
+
+class SeasonScheduleResponse(BaseModel):
+    season: int
+    schedule: List[Dict[str, Any]]

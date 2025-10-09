@@ -1,1 +1,1 @@
-SEASON_CACHE = {}
+CACHE = {}
