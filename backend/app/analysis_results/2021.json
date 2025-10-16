@@ -1,0 +1,802 @@
+[
+  {
+    "driver_code": "RUS",
+    "driver_number": "63",
+    "full_name": "George Russell",
+    "team_name": "Williams",
+    "average_wet_to_dry_delta": 9.68,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 79.912,
+        "dry_laps_analyzed_count": 14,
+        "wet_lap_time_median": 89.937,
+        "wet_laps_analyzed_count": 13,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 12.55
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 111.078,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 119.864,
+        "wet_laps_analyzed_count": 7,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 7.91
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 111.078,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 120.596,
+        "wet_laps_analyzed_count": 2,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 8.57
+      }
+    ],
+    "rank": 1
+  },
+  {
+    "driver_code": "PER",
+    "driver_number": "11",
+    "full_name": "Sergio Perez",
+    "team_name": "Red Bull Racing",
+    "average_wet_to_dry_delta": 11.72,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 79.489,
+        "dry_laps_analyzed_count": 12,
+        "wet_lap_time_median": 88.433,
+        "wet_laps_analyzed_count": 17,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 11.25
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.572,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 120.539,
+        "wet_laps_analyzed_count": 9,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.11
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.572,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 118.083,
+        "wet_laps_analyzed_count": 3,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 10.8
+      }
+    ],
+    "rank": 2
+  },
+  {
+    "driver_code": "VER",
+    "driver_number": "33",
+    "full_name": "Max Verstappen",
+    "team_name": "Red Bull Racing",
+    "average_wet_to_dry_delta": 12.12,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 79.106,
+        "dry_laps_analyzed_count": 3,
+        "wet_lap_time_median": 88.257,
+        "wet_laps_analyzed_count": 19,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 11.57
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 105.127,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 119.161,
+        "wet_laps_analyzed_count": 6,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.35
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 105.127,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 117.138,
+        "wet_laps_analyzed_count": 3,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 11.43
+      }
+    ],
+    "rank": 3
+  },
+  {
+    "driver_code": "NOR",
+    "driver_number": "4",
+    "full_name": "Lando Norris",
+    "team_name": "McLaren",
+    "average_wet_to_dry_delta": 12.32,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 77.629,
+        "dry_laps_analyzed_count": 7,
+        "wet_lap_time_median": 88.908,
+        "wet_laps_analyzed_count": 17,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 14.53
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.138,
+        "dry_laps_analyzed_count": 7,
+        "wet_lap_time_median": 117.235,
+        "wet_laps_analyzed_count": 5,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 9.42
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.138,
+        "dry_laps_analyzed_count": 7,
+        "wet_lap_time_median": 121.062,
+        "wet_laps_analyzed_count": 4,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.0
+      }
+    ],
+    "rank": 4
+  },
+  {
+    "driver_code": "SAI",
+    "driver_number": "55",
+    "full_name": "Carlos Sainz",
+    "team_name": "Ferrari",
+    "average_wet_to_dry_delta": 12.4,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 79.93,
+        "dry_laps_analyzed_count": 12,
+        "wet_lap_time_median": 88.715,
+        "wet_laps_analyzed_count": 16,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 10.99
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.759,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 120.182,
+        "wet_laps_analyzed_count": 4,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 12.57
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.759,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 121.324,
+        "wet_laps_analyzed_count": 2,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.64
+      }
+    ],
+    "rank": 5
+  },
+  {
+    "driver_code": "LEC",
+    "driver_number": "16",
+    "full_name": "Charles Leclerc",
+    "team_name": "Ferrari",
+    "average_wet_to_dry_delta": 12.64,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 79.123,
+        "dry_laps_analyzed_count": 13,
+        "wet_lap_time_median": 88.31,
+        "wet_laps_analyzed_count": 19,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 11.61
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.845,
+        "dry_laps_analyzed_count": 3,
+        "wet_lap_time_median": 118.813,
+        "wet_laps_analyzed_count": 5,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 11.2
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.845,
+        "dry_laps_analyzed_count": 3,
+        "wet_lap_time_median": 122.994,
+        "wet_laps_analyzed_count": 5,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 15.11
+      }
+    ],
+    "rank": 6
+  },
+  {
+    "driver_code": "STR",
+    "driver_number": "18",
+    "full_name": "Lance Stroll",
+    "team_name": "Aston Martin",
+    "average_wet_to_dry_delta": 12.68,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 79.026,
+        "dry_laps_analyzed_count": 8,
+        "wet_lap_time_median": 89.898,
+        "wet_laps_analyzed_count": 14,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.76
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.805,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 121.597,
+        "wet_laps_analyzed_count": 5,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 12.79
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.805,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 120.194,
+        "wet_laps_analyzed_count": 6,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 11.49
+      }
+    ],
+    "rank": 7
+  },
+  {
+    "driver_code": "LAT",
+    "driver_number": "6",
+    "full_name": "Nicholas Latifi",
+    "team_name": "Williams",
+    "average_wet_to_dry_delta": 13.12,
+    "sessions_analyzed_count": 2,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.6,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 120.552,
+        "wet_laps_analyzed_count": 6,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 12.04
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.6,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 122.877,
+        "wet_laps_analyzed_count": 5,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 14.2
+      }
+    ],
+    "rank": 8
+  },
+  {
+    "driver_code": "OCO",
+    "driver_number": "31",
+    "full_name": "Esteban Ocon",
+    "team_name": "Alpine",
+    "average_wet_to_dry_delta": 13.2,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 80.255,
+        "dry_laps_analyzed_count": 13,
+        "wet_lap_time_median": 89.8,
+        "wet_laps_analyzed_count": 12,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 11.89
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.025,
+        "dry_laps_analyzed_count": 6,
+        "wet_lap_time_median": 122.51,
+        "wet_laps_analyzed_count": 8,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 14.47
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.025,
+        "dry_laps_analyzed_count": 6,
+        "wet_lap_time_median": 121.192,
+        "wet_laps_analyzed_count": 4,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.24
+      }
+    ],
+    "rank": 9
+  },
+  {
+    "driver_code": "GAS",
+    "driver_number": "10",
+    "full_name": "Pierre Gasly",
+    "team_name": "AlphaTauri",
+    "average_wet_to_dry_delta": 13.21,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 79.925,
+        "dry_laps_analyzed_count": 15,
+        "wet_lap_time_median": 89.876,
+        "wet_laps_analyzed_count": 10,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 12.45
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.058,
+        "dry_laps_analyzed_count": 6,
+        "wet_lap_time_median": 120.751,
+        "wet_laps_analyzed_count": 8,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.85
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.058,
+        "dry_laps_analyzed_count": 6,
+        "wet_lap_time_median": 120.186,
+        "wet_laps_analyzed_count": 5,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.32
+      }
+    ],
+    "rank": 10
+  },
+  {
+    "driver_code": "VET",
+    "driver_number": "5",
+    "full_name": "Sebastian Vettel",
+    "team_name": "Aston Martin",
+    "average_wet_to_dry_delta": 13.43,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 78.057,
+        "dry_laps_analyzed_count": 7,
+        "wet_lap_time_median": 90.123,
+        "wet_laps_analyzed_count": 6,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 15.46
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.278,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 120.555,
+        "wet_laps_analyzed_count": 6,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 12.38
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.278,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 120.648,
+        "wet_laps_analyzed_count": 6,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 12.46
+      }
+    ],
+    "rank": 11
+  },
+  {
+    "driver_code": "TSU",
+    "driver_number": "22",
+    "full_name": "Yuki Tsunoda",
+    "team_name": "AlphaTauri",
+    "average_wet_to_dry_delta": 13.65,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 79.989,
+        "dry_laps_analyzed_count": 14,
+        "wet_lap_time_median": 89.694,
+        "wet_laps_analyzed_count": 10,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 12.13
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.571,
+        "dry_laps_analyzed_count": 7,
+        "wet_lap_time_median": 123.003,
+        "wet_laps_analyzed_count": 2,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 14.35
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.571,
+        "dry_laps_analyzed_count": 7,
+        "wet_lap_time_median": 123.125,
+        "wet_laps_analyzed_count": 6,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 14.46
+      }
+    ],
+    "rank": 12
+  },
+  {
+    "driver_code": "MSC",
+    "driver_number": "47",
+    "full_name": "Mick Schumacher",
+    "team_name": "Haas F1 Team",
+    "average_wet_to_dry_delta": 13.81,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 78.691,
+        "dry_laps_analyzed_count": 10,
+        "wet_lap_time_median": 90.95,
+        "wet_laps_analyzed_count": 4,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 15.58
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 108.834,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 123.973,
+        "wet_laps_analyzed_count": 1,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.91
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 108.834,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 121.839,
+        "wet_laps_analyzed_count": 3,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 11.95
+      }
+    ],
+    "rank": 13
+  },
+  {
+    "driver_code": "RIC",
+    "driver_number": "3",
+    "full_name": "Daniel Ricciardo",
+    "team_name": "McLaren",
+    "average_wet_to_dry_delta": 13.89,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 78.089,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 89.409,
+        "wet_laps_analyzed_count": 15,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 14.5
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.901,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 120.864,
+        "wet_laps_analyzed_count": 7,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.06
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.901,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 121.993,
+        "wet_laps_analyzed_count": 4,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 14.12
+      }
+    ],
+    "rank": 14
+  },
+  {
+    "driver_code": "BOT",
+    "driver_number": "77",
+    "full_name": "Valtteri Bottas",
+    "team_name": "Mercedes",
+    "average_wet_to_dry_delta": 13.93,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 78.101,
+        "dry_laps_analyzed_count": 10,
+        "wet_lap_time_median": 90.0,
+        "wet_laps_analyzed_count": 16,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 15.23
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.905,
+        "dry_laps_analyzed_count": 4,
+        "wet_lap_time_median": 120.758,
+        "wet_laps_analyzed_count": 6,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 12.96
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.905,
+        "dry_laps_analyzed_count": 4,
+        "wet_lap_time_median": 121.452,
+        "wet_laps_analyzed_count": 7,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.61
+      }
+    ],
+    "rank": 15
+  },
+  {
+    "driver_code": "GIO",
+    "driver_number": "99",
+    "full_name": "Antonio Giovinazzi",
+    "team_name": "Alfa Romeo Racing",
+    "average_wet_to_dry_delta": 14.41,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 79.171,
+        "dry_laps_analyzed_count": 12,
+        "wet_lap_time_median": 90.014,
+        "wet_laps_analyzed_count": 12,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.7
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.078,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 122.747,
+        "wet_laps_analyzed_count": 2,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 14.63
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.078,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 123.042,
+        "wet_laps_analyzed_count": 10,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 14.91
+      }
+    ],
+    "rank": 16
+  },
+  {
+    "driver_code": "ALO",
+    "driver_number": "14",
+    "full_name": "Fernando Alonso",
+    "team_name": "Alpine",
+    "average_wet_to_dry_delta": 14.72,
+    "sessions_analyzed_count": 3,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 77.777,
+        "dry_laps_analyzed_count": 7,
+        "wet_lap_time_median": 90.33,
+        "wet_laps_analyzed_count": 13,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 16.14
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.53,
+        "dry_laps_analyzed_count": 6,
+        "wet_lap_time_median": 120.382,
+        "wet_laps_analyzed_count": 5,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.0
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.53,
+        "dry_laps_analyzed_count": 6,
+        "wet_lap_time_median": 122.532,
+        "wet_laps_analyzed_count": 6,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 15.02
+      }
+    ],
+    "rank": 17
+  },
+  {
+    "driver_code": "MAZ",
+    "driver_number": "9",
+    "full_name": "Nikita Mazepin",
+    "team_name": "Haas F1 Team",
+    "average_wet_to_dry_delta": 15.3,
+    "sessions_analyzed_count": 2,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 78.668,
+        "dry_laps_analyzed_count": 4,
+        "wet_lap_time_median": 92.09,
+        "wet_laps_analyzed_count": 3,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 17.06
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 108.011,
+        "dry_laps_analyzed_count": 2,
+        "wet_lap_time_median": 122.642,
+        "wet_laps_analyzed_count": 2,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 13.55
+      }
+    ],
+    "rank": 18
+  },
+  {
+    "driver_code": "RAI",
+    "driver_number": "7",
+    "full_name": "Kimi R\u00e4ikk\u00f6nen",
+    "team_name": "Alfa Romeo Racing",
+    "average_wet_to_dry_delta": 15.68,
+    "sessions_analyzed_count": 2,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 77.845,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 89.559,
+        "wet_laps_analyzed_count": 12,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 15.05
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 106.941,
+        "dry_laps_analyzed_count": 6,
+        "wet_lap_time_median": 124.382,
+        "wet_laps_analyzed_count": 1,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 16.31
+      }
+    ],
+    "rank": 19
+  },
+  {
+    "driver_code": "HAM",
+    "driver_number": "44",
+    "full_name": "Lewis Hamilton",
+    "team_name": "Mercedes",
+    "average_wet_to_dry_delta": 18.94,
+    "sessions_analyzed_count": 4,
+    "sessions_analyzed_list": [
+      {
+        "session_name": "Emilia Romagna Grand Prix R",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 79.096,
+        "dry_laps_analyzed_count": 11,
+        "wet_lap_time_median": 88.194,
+        "wet_laps_analyzed_count": 20,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 11.5
+      },
+      {
+        "session_name": "Hungarian Grand Prix R",
+        "dry_baseline_session_name": "Practice 1",
+        "dry_lap_time_median": 79.871,
+        "dry_laps_analyzed_count": 5,
+        "wet_lap_time_median": 109.712,
+        "wet_laps_analyzed_count": 1,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 37.36
+      },
+      {
+        "session_name": "Belgian Grand Prix Q",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.262,
+        "dry_laps_analyzed_count": 4,
+        "wet_lap_time_median": 119.658,
+        "wet_laps_analyzed_count": 6,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 11.56
+      },
+      {
+        "session_name": "Belgian Grand Prix FP3",
+        "dry_baseline_session_name": "Practice 2",
+        "dry_lap_time_median": 107.262,
+        "dry_laps_analyzed_count": 4,
+        "wet_lap_time_median": 123.706,
+        "wet_laps_analyzed_count": 3,
+        "wet_compound_used": "INTERMEDIATE",
+        "delta_percentage": 15.33
+      }
+    ],
+    "rank": 20
+  }
+]

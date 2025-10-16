@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  font-family: var(--font-titillium), sans-serif;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-orbitron), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.font-orbitron{
+  font-family: var(--font-orbitron);
+}
+
+.font-titillium{
+  font-family: var(--font-titillium);
+}
+
+@keyframes breathe {
+  0%, 100% {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  50% {
+    color: rgba(255, 255, 255, 1);
+  }
+}
+
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+.stats-divider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 272px;
+    height: 100%;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    background-color: #1e1e21;
+    clip-path: polygon(0 0, 100% 0, 50% 100%, 0 100%);
+}
+
