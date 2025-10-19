@@ -4,8 +4,7 @@ import { DriverSeasonPerformance, DriversTableProps } from "@/lib/Types/SeasonTy
 import { useEffect, useState } from "react";
 import {teamColors} from "@/lib/teamColors.js"
 import Image from "next/image";
-import { Session } from "inspector/promises";
-import { option } from "framer-motion/client";
+import BestSessionShowcase from "./BestSession";
 
 
 
@@ -59,7 +58,7 @@ export default function DriversTable({season}: DriversTableProps){
   
                             <div className="col-span-5">DRIVER</div>
                             <div className="col-span-3">DELTA</div>
-                            <div className="col-span-2">RATING</div>
+                            <div className="col-span-2"></div>
                         </div>  
                     </div>
 
@@ -93,7 +92,7 @@ export default function DriversTable({season}: DriversTableProps){
 
             <div className="col-span-3">
                 {selectedDriver? (
-                    <div className="bg-black h-150 overflow-visible mt-20">
+                    <div style={{borderBlockColor: teamColors[selectedDriver.team_name as keyof typeof teamColors]}} className="bg-black h-150 overflow-visible mt-20 border-b-6">
                         <div className="flex bg-black h-[20%] z-10">
                             <div style={{background: teamColors[selectedDriver.team_name as keyof typeof teamColors]}} className="flex gap flex-3 items-center pl-4 gap-2">
                                 <Image
@@ -102,8 +101,8 @@ export default function DriversTable({season}: DriversTableProps){
                                 width={100}
                                 height={100}/>
                                 <div className="flex flex-col justify-center">
-                                    <h1 className="font-extrabold text-2xl break-words whitespace-normal">{selectedDriver.full_name}</h1>
-                                    <h1 className="">{selectedDriver.team_name}</h1>
+                                    <h1 className="font-extrabold text-2xl break-words">{selectedDriver.full_name}</h1>
+                                    <h1 className="text-gray-300 font-extrabold">{selectedDriver.team_name}</h1>
                                 </div>
                                 
                             </div>
@@ -124,8 +123,11 @@ export default function DriversTable({season}: DriversTableProps){
                             </div>
                         </div>
 
-                        <div className="flex gap-5 mt-6 p-4">
-                            <div className="bg-[#15161e] min-w-min">
+                        <div className="flex flex-col gap-8 mt-2 p-4">
+                            <div className="-mb-7 font-titillium bg-gray-700 max-w-max px-2">
+                                <p className="font-bold">Session Name ({selectedDriver.sessions_analyzed_count}):</p>
+                            </div>
+                            <div className="bg-[#15161e] w-[100%] max-h-max">
                                 <select
                                 onChange={(e) => setSelectedSessionName(e.target.value)}
                                 value={selectedSessionName || ''}
@@ -136,38 +138,53 @@ export default function DriversTable({season}: DriversTableProps){
                                     ))}
 
                                 </select>
+                            </div>
 
-                                {selectedSessionDetails && (
-                                    <div className="bg-gray-900/50 p-4">
-                                        <div className="flex justify-between items-center  font-titillium ">
-                                            <h3 className="font-bold text-gray-400">
-                                                Baseline: {selectedSessionDetails.dry_baseline_session_name}
-                                            </h3>
-                                            <span className={`font-bold text-xl ${selectedSessionDetails.delta_percentage > 0 ? 'text-red-400' : 'text-green-400'}`}>
-                                                {selectedSessionDetails.delta_percentage > 0 ? '+' : ''}
-                                                {selectedSessionDetails.delta_percentage.toFixed(2)}%
-                                            </span>
+                            
+                            {selectedSessionDetails && (
+                                <div className="flex flex-col gap-10">
+                                    <div className="flex gap-10">
+                                        <div className="flex flex-1 flex-col justify-center font-titillium bg-gray-900/50 ml-2 py-10 px-2 gap-5 relative">
+                                            <div className="max-w-max bg-gray-700 px-2 py-1 absolute top-0 -left-2 -mt-3 ">
+                                                <p className="font-bold text-gray-200 text-md">Dry Pace</p>
+                                            </div>
+                                            <div className="flex gap-1">
+                                                <p className="text-4xl text-gray-200">{selectedSessionDetails.dry_lap_time_median}</p> 
+                                                <p className="self-end text-xl">s</p>
+                                            </div>
+                                        
                                         </div>
 
-                                        <div className="grid grid-cols-2 gap-4 mt-4 text-sm font-titillium">
-                                            <div>
-                                                <p className="font-bold">Dry Pace</p>
-                                                <p>
-                                                    {selectedSessionDetails.dry_lap_time_median.toFixed(3)}s
-                                                    <span className="text-gray-400"> ({selectedSessionDetails.dry_laps_analyzed_count} laps)</span>
-                                                </p>
+                                        <div className="flex flex-1 flex-col bg-gray-900/50 font-titillium gap-5 py-10 px-2  relative">
+                                            <div className="max-w-max bg-gray-700 px-2 py-1 absolute top-0 -left-2 -mt-3 ">
+                                                <p className="font-bold text-gray-200 text-md">Wet Pace</p>
                                             </div>
-                                            <div>
-                                                <p className="font-bold">Wet Pace ({selectedSessionDetails.wet_compound_used})</p>
-                                                <p>
-                                                    {selectedSessionDetails.wet_lap_time_median.toFixed(3)}s
-                                                    <span className="text-gray-400"> ({selectedSessionDetails.wet_laps_analyzed_count} laps)</span>
-                                                </p>
+                                            <div className="flex justify-between">
+                                                <div className="flex gap-1">
+                                                    <p className="text-4xl text-gray-200 ">{selectedSessionDetails.wet_lap_time_median}</p>
+                                                    <p className=" text-xl self-end">s</p>
+                                                </div>                
+                                                <p className="text-red-400 self-center text-xl font-extrabold">{"+" +selectedSessionDetails.delta_percentage +"%"}</p>
                                             </div>
+                                            
                                         </div>
                                     </div>
-                                )}
-                            </div>
+                                    
+                                    {/* Best session showcase */}
+                                    <div className="px-2">
+                                        <BestSessionShowcase driver={selectedDriver} />
+                                    </div>
+                                    
+                                    
+
+                                    
+                                </div>
+                            )}
+                            <div className="font-orbitron -mt-2 flex justify-center">
+                                        <button style={{background: teamColors[selectedDriver.team_name as keyof typeof teamColors]}} className="p-2 font-bold cursor-pointer rounded-sm hover:brightness-80">
+                                            View Career Stats
+                                        </button>
+                                    </div>
                         </div>
                         
                     </div>

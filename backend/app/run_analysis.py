@@ -25,7 +25,7 @@ def run_and_save_analysis(year: int):
 
 if __name__ == '__main__':
     # Define which seasons you want to pre-calculate
-    seasons_to_analyze = [2021]
+    seasons_to_analyze = [2023]
     
     for season in seasons_to_analyze:
         run_and_save_analysis(season)
