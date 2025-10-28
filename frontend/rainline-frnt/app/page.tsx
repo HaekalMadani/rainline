@@ -1,6 +1,7 @@
 import SeasonSelectorWrapper from "@/components/Wrapper";
 
 export default function Home() {
+
   return (
     <div className="flex flex-col min-h-screen bg-[#15161e]">
       <div className="w-screen h-20 bg-black sticky content-center border-b border-[#0048b7] pl-15 ">
@@ -16,7 +17,6 @@ export default function Home() {
           <SeasonSelectorWrapper/>
         </div>
       </div>
-
     </div>
   );
 }
