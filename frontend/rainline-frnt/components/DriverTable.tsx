@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import {teamColors} from "@/lib/teamColors.js"
 import Image from "next/image";
 import BestSessionShowcase from "./BestSession";
+import { motion } from "framer-motion";
 
 
 
@@ -49,7 +50,7 @@ export default function DriversTable({season}: DriversTableProps){
     return(
         <div className="grid grid-cols-5 gap-10 px-15 py-4">
             <div className="col-span-2">
-                <h1 className="text-xl font-bold">{season} Wet Performance Standing</h1>
+                <h1 className="text-xl font-bold text-center">{season} Wet Performance Standing</h1>
 
                 <div className="bg-black border rounded-md border-gray-800 mt-4 p-2">
                     <div className="sticky top-0 font-orbitron py-2 px-4 text-gray-400">
@@ -57,8 +58,8 @@ export default function DriversTable({season}: DriversTableProps){
                             <div className="col-span-2">POS</div>
   
                             <div className="col-span-5">DRIVER</div>
-                            <div className="col-span-3">DELTA</div>
-                            <div className="col-span-2"></div>
+                            <div className="col-span-5">AVG. DELTA</div>
+                            
                         </div>  
                     </div>
 
@@ -90,7 +91,11 @@ export default function DriversTable({season}: DriversTableProps){
                 
             </div>
 
-            <div className="col-span-3">
+            <motion.div
+            className="col-span-3"
+            initial={{opacity: 0}}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}>
                 {selectedDriver? (
                     <div style={{borderBlockColor: teamColors[selectedDriver.team_name as keyof typeof teamColors]}} className="bg-black h-150 overflow-visible mt-20 border-b-6">
                         <div className="flex bg-black h-[20%] z-10">
@@ -190,7 +195,7 @@ export default function DriversTable({season}: DriversTableProps){
                     </div>
 
                 ) : (<p className="text-gray-500">Select a driver to view details.</p>)}
-            </div>
+            </motion.div>
         </div>
     )
 

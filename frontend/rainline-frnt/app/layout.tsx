@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {Orbitron, Titillium_Web } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 
 const titillium = Titillium_Web({
@@ -30,6 +31,29 @@ export default function RootLayout({
       <body
         className={`${titillium.variable} ${orbitron.variable} antialiased`}
       >
+        <header className="w-screen h-20 bg-black  sticky top-0 border-b border-[#0048b7] px-6 flex items-center justify-between">
+        
+       
+        <div className="font-extrabold text-2xl flex gap-1">
+          <h1 className="text-[#0048b7]">Rain</h1>
+          <h1>Line</h1>
+        </div>
+
+        <nav className="flex gap-6 text-lg font-semibold font-orbitron">
+          <Link href="/" className="hover:text-[#0048b7] transition">
+            Leaderboard
+          </Link>
+          <Link href="/drivers" className="hover:text-[#0048b7] transition">
+            Drivers
+          </Link>
+
+          <Link href="/teams">
+            Teams
+          </Link>
+        </nav>
+
+      </header>
+
         {children}
       </body>
     </html>

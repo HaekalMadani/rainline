@@ -18,6 +18,6 @@ app.add_middleware(
 
 app.include_router(
     season.router,
-    prefix="/api/season", 
+    prefix="/api", 
     tags=["Seasons"]          
 )

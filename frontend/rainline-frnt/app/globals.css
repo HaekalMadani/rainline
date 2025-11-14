@@ -57,3 +57,33 @@ h1, h2, h3, h4, h5, h6 {
     clip-path: polygon(0 0, 100% 0, 50% 100%, 0 100%);
 }
 
+/* globals.css */
+.bg-carbon {
+  background-image: 
+    radial-gradient(circle at center center, transparent, rgb(21,22,30)),
+    repeating-linear-gradient(
+      135deg,
+      rgb(21,22,30) 0px,
+      rgb(21,22,30) 2px,
+      transparent 2px,
+      transparent 10px,
+      rgb(21,22,30) 10px,
+      rgb(21,22,30) 11px,
+      transparent 11px,
+      transparent 21px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgb(47,47,47) 0px,
+      rgb(47,47,47) 4px,
+      transparent 4px,
+      transparent 8px
+    ),
+    linear-gradient(
+      90deg,
+      rgb(21,22,30),
+      rgb(21,22,30)
+    );
+  background-size: auto;
+  background-repeat: repeat;
+}

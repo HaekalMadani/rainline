@@ -1,65 +1,45 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { SelectSeasonProps } from "@/lib/Types/SeasonType";
 
 const seasons = [2021, 2022, 2023, 2024];
 
-export default function SelectSeason({selectedSeason, onSeasonSelect}: SelectSeasonProps) {
-    
-  const [open, setOpen] = useState(false);
-
+export default function SelectSeason({ selectedSeason, onSeasonSelect }: SelectSeasonProps) {
+  const [openSeason, setOpenSeason] = useState<number | null>(selectedSeason ?? null);
 
   const handleSelect = (season: number) => {
-    onSeasonSelect(season)
-    setOpen(false);
+    onSeasonSelect(season);
+    setOpenSeason(season);
   };
 
   return (
     <div className="w-screen flex justify-center">
-      <motion.div
-        layout
-        className=""
-        transition={{ layout: { duration: 0, type: "spring" } }}
-      >
-        {/* Header / Button */}
-        <motion.button
-          layout="position"
-          className={`w-full text-xl  font-orbitron px-4 py-3 cursor-pointer ${
-            open ? "text-gray-500" : "animate-breathe"
-          }`}
-          onClick={() => setOpen(!open)}
+      <div>
+        <motion.div
+          key="content"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex"
         >
-          {selectedSeason ? `${selectedSeason} Season` : "Select Season"}
-        </motion.button>
-
-        {/* Expanding Content */}
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              key="content"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="flex"
-            >
-              <ul className="flex gap-10">
-                {seasons.map((season) => (
-                  <li
-                    key={season}
-                    onClick={() => handleSelect(season)}
-                    className="px-6 py-3 font-orbitron border border-[#0048b7] cursor-pointer rounded-s hover:bg-blue-900"
-                  >
-                    {season}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+          <ul className="flex gap-10">
+            {seasons.map((season) => (
+              <li
+                key={season}
+                onClick={() => handleSelect(season)}
+                className={`px-6 py-3 font-orbitron border border-[#0048b7] bg-black cursor-pointer rounded-s hover:bg-blue-900 ${
+                  openSeason === season ? "bg-blue-900" : ""
+                }`}
+              >
+                {season}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      </div>
     </div>
   );
 }
