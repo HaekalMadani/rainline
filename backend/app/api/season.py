@@ -83,7 +83,7 @@ def get_driver_career(driver_code: str):
         "driver_code": driver_code,
         "full_name": full_name,
         "team_history": team_history,
-        "seasons": driver_seasons,
+        "seasons_standing": driver_seasons,
     }
 
     CACHE[cache_key] = result

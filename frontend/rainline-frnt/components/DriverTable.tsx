@@ -8,7 +8,6 @@ import BestSessionShowcase from "./BestSession";
 import { motion } from "framer-motion";
 
 
-
 export default function DriversTable({season}: DriversTableProps){
     const [selectedDriver, setSelectedDriver] = useState<DriverSeasonPerformance | null> (null)
     const [selectedSessionName, setSelectedSessionName] = useState<string | null>(null);
@@ -186,10 +185,10 @@ export default function DriversTable({season}: DriversTableProps){
                                 </div>
                             )}
                             <div className="font-orbitron -mt-2 flex justify-center">
-                                        <button style={{background: teamColors[selectedDriver.team_name as keyof typeof teamColors]}} className="p-2 font-bold cursor-pointer rounded-sm hover:brightness-80">
-                                            View Career Stats
-                                        </button>
-                                    </div>
+                                <button style={{background: teamColors[selectedDriver.team_name as keyof typeof teamColors]}} className="p-2 font-bold cursor-pointer rounded-sm hover:brightness-80">
+                                    View Career Stats
+                                </button>
+                            </div>
                         </div>
                         
                     </div>

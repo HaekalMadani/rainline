@@ -31,12 +31,12 @@ export default function RootLayout({
       <body
         className={`${titillium.variable} ${orbitron.variable} antialiased`}
       >
-        <header className="w-screen h-20 bg-black  sticky top-0 border-b border-[#0048b7] px-6 flex items-center justify-between">
+        <header className="w-screen h-13 bg-[#1A1A1A] z-100 sticky top-0 px-6 flex items-center justify-between">
         
        
         <div className="font-extrabold text-2xl flex gap-1">
-          <h1 className="text-[#0048b7]">Rain</h1>
-          <h1>Line</h1>
+          {/* <h1 className="text-[#0048b7]">Race</h1> */}
+          <h1>RaceLine</h1>
         </div>
 
         <nav className="flex gap-6 text-lg font-semibold font-orbitron">
