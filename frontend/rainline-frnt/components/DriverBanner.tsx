@@ -3,12 +3,14 @@ import { DriverCareerType } from "@/lib/Types/driverType"
 import Image from "next/image";
 import { teamColors } from "@/lib/teamColors";
 import AnimatedNumber from "./AnimatedCount";
+import { useRouter  } from "next/navigation";
 
 interface DriverBannerProps {
     displayDriver: DriverCareerType | null;
 }
 
 export default function DriverBanner({displayDriver}: DriverBannerProps){
+    const router = useRouter()
 
     if(!displayDriver) return <div className="min-h-80 bg-[#D9D9D9]"></div>
 
@@ -48,7 +50,9 @@ export default function DriverBanner({displayDriver}: DriverBannerProps){
                 <div className="relative lg:absolute lg:right-40 lg:bottom-10 z-10 flex flex-col px-2 lg:px-0 items-start lg:items-center mt-auto z-10">
                     <div className="tabular-nums text-8xl md:text-9xl lg:text-[200px] font-extrabold text-center leading-none text-black drop-shadow-md lg:drop-shadow-none"><AnimatedNumber value={Number(displayDriver?.driver_number)} /></div>
                     <div className="font-orbitron flex justify-center mt-2 lg:mt-0">
-                                <button style={{background: teamColors[displayDriver?.current_team as keyof typeof teamColors]}} className="py-3 px-8 lg:py-2 lg:px-4 font-bold cursor-pointer rounded-sm hover:brightness-80 transition-all text-white">
+                                <button 
+                                onClick= {() => router.push(`/drivers/${displayDriver.full_name.replaceAll(' ', '-').toLowerCase()}`)}
+                                style={{background: teamColors[displayDriver?.current_team as keyof typeof teamColors]}} className="py-3 px-8 lg:py-2 lg:px-4 font-bold cursor-pointer rounded-sm hover:brightness-80 transition-all text-white">
                                     Driver Details
                                 </button>
                     </div>
