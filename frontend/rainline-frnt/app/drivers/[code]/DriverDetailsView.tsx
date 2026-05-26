@@ -65,7 +65,7 @@ export default function DriverDetailsView({ code }: { code: string }) {
             </div>
 
             <DriverDetailsHero driver={driver} />
-            <CareerStats driver={driver} teamColor={teamColor} />
+            <CareerStats driver={driver} />
             <TeamsTimeline driver={driver} />
             <BioWetPanel driver={driver} />
 

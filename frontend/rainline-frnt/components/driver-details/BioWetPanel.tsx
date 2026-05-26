@@ -52,8 +52,14 @@ export default function BioWetPanel({ driver }: Props) {
                             <div className="label">Career Status</div>
                             <div
                                 className="val"
-                                style={{ color: career.is_active ? "var(--rl-success)" : "var(--rl-fg-muted)" }}
+                                style={{
+                                    color: career.is_active ? "var(--rl-success)" : "var(--rl-fg-muted)",
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    gap: 8,
+                                }}
                             >
+                                <span aria-hidden="true">{career.is_active ? "●" : "○"}</span>
                                 {status}
                             </div>
                         </div>
@@ -84,7 +90,7 @@ export default function BioWetPanel({ driver }: Props) {
                                     <div className="val">
                                         {wet.career_average_delta != null
                                             ? `+${wet.career_average_delta.toFixed(2)}%`
-                                            : "—"}
+                                            : "n/a"}
                                     </div>
                                 </div>
                                 <div className="delta">
@@ -97,7 +103,7 @@ export default function BioWetPanel({ driver }: Props) {
                                         <div className="dd-season-rank" key={s.season}>
                                             <div className="yr">{s.season}</div>
                                             <div className="rk">
-                                                {s.rank ?? "—"}
+                                                {s.rank ?? "n/a"}
                                                 {s.field_size > 0 && (
                                                     <em>/{s.field_size}</em>
                                                 )}
@@ -105,7 +111,7 @@ export default function BioWetPanel({ driver }: Props) {
                                             <div className="yr">
                                                 {s.average_delta != null
                                                     ? `+${s.average_delta.toFixed(1)}%`
-                                                    : "—"}
+                                                    : "n/a"}
                                             </div>
                                         </div>
                                     ))}

@@ -70,7 +70,7 @@ export default function TeamsTimeline({ driver }: Props) {
                             <div className="races">
                                 {r.seasons}
                                 <span style={{ fontSize: 10, marginLeft: 4, color: "var(--rl-fg-muted)", letterSpacing: ".18em" }}>
-                                    {r.seasons === 1 ? "S" : "S"}
+                                    {r.seasons === 1 ? "SEASON" : "SEASONS"}
                                 </span>
                             </div>
                         </div>

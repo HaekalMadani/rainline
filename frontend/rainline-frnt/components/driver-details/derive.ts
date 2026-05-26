@@ -115,8 +115,8 @@ export function collapseTeamHistory(team_history: Record<number, string>): TeamR
 
 export function formatTeamRangeYears(r: TeamRange, currentYear: number): string {
     if (r.start === r.end) return String(r.start);
-    if (r.end >= currentYear) return `${r.start}—NOW`;
-    return `${r.start}—${r.end}`;
+    if (r.end >= currentYear) return `${r.start}–NOW`;
+    return `${r.start}–${r.end}`;
 }
 
 export function teamSlug(team: string): string {

@@ -111,14 +111,17 @@ h1, h2, h3, h4, h5, h6 {
   --rl-bg-row-active: #B6BECF;
 
   /* foreground */
-  --rl-fg:            #0a0a0a;
-  --rl-fg-strong:     #000000;
-  --rl-fg-muted:      #4b5563;
-  --rl-fg-dim:        #6b7280;
-  --rl-fg-on-dark:    #ededed;
-  --rl-fg-on-light:   #0a0a0a;
-  --rl-border:        rgba(0,0,0,.18);
-  --rl-border-strong: #000000;
+  --rl-fg:                 #0a0a0a;
+  --rl-fg-strong:          #000000;
+  --rl-fg-muted:           #4b5563;
+  --rl-fg-dim:             #6b7280;
+  --rl-fg-on-dark:         #ededed;
+  --rl-fg-on-dark-muted:   rgba(255,255,255,.7);   /* AA on Race Black for labels */
+  --rl-fg-on-dark-dim:     rgba(255,255,255,.55);  /* decorative only, fails AA */
+  --rl-fg-on-light:        #0a0a0a;
+  --rl-border:             rgba(0,0,0,.18);
+  --rl-border-strong:      #000000;
+  --rl-overlay-on-dark:    rgba(255,255,255,.06);  /* inset panels on dark cards */
 
   /* semantic */
   --rl-accent:        #0048b7;
@@ -227,6 +230,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .dd-back svg { width: 14px; height: 14px; }
 .dd-back:hover { background: var(--rl-accent); }
+.dd-back:focus-visible { outline: 2px solid var(--rl-accent); outline-offset: 3px; }
 
 /* hero */
 .dd-hero {
@@ -311,7 +315,7 @@ h1, h2, h3, h4, h5, h6 {
 .dd-hero-team-label {
   font-family: var(--rl-font-display);
   font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
-  color: rgba(255,255,255,.55);
+  color: var(--rl-fg-on-dark-muted);
   margin-bottom: 4px;
 }
 .dd-hero-team-name {
@@ -513,13 +517,13 @@ h1, h2, h3, h4, h5, h6 {
   background: #000; color: #fff;
   border-bottom: 4px solid var(--team-color);
 }
-.dd-stat-hero .label { color: rgba(255,255,255,.55); }
+.dd-stat-hero .label { color: var(--rl-fg-on-dark-muted); }
 .dd-stat-hero .num { color: #fff; font-size: 96px; }
 .dd-stat-hero .num em {
   font-style: normal;
   color: var(--team-color);
 }
-.dd-stat-hero .sub { color: rgba(255,255,255,.65); }
+.dd-stat-hero .sub { color: var(--rl-fg-on-dark-muted); }
 
 .dd-stats-secondary {
   margin-top: 14px;
@@ -528,10 +532,10 @@ h1, h2, h3, h4, h5, h6 {
   gap: 14px;
 }
 .dd-stat-mini {
-  background: #fff;
+  background: var(--rl-bg-card);
   padding: 14px 16px;
   display: flex; flex-direction: column; gap: 4px;
-  border-left: 3px solid #000;
+  border-bottom: 4px solid var(--team-color);
 }
 .dd-stat-mini .label {
   font-family: var(--rl-font-display);
@@ -559,7 +563,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   height: 70px;
   margin: 28px 8px 16px;
-  background: #fff;
+  background: var(--rl-bg-app);
   display: flex;
 }
 .dd-timeline-seg {
@@ -660,7 +664,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   margin-bottom: 4px;
 }
-.dd-bio-card.dark .dd-bio-item .label { color: rgba(255,255,255,.55); }
+.dd-bio-card.dark .dd-bio-item .label { color: var(--rl-fg-on-dark-muted); }
 .dd-bio-item .val {
   font-family: var(--rl-font-display);
   font-size: 18px; font-weight: 800; letter-spacing: 0.04em;
@@ -671,7 +675,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .dd-wet {
   margin-top: 18px;
-  background: rgba(255,255,255,.06);
+  background: var(--rl-overlay-on-dark);
   padding: 14px 16px;
   display: grid;
   grid-template-columns: 1fr auto;
@@ -681,7 +685,7 @@ h1, h2, h3, h4, h5, h6 {
 .dd-wet .lbl {
   font-family: var(--rl-font-display);
   font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-  color: rgba(255,255,255,.55); font-weight: 700;
+  color: var(--rl-fg-on-dark-muted); font-weight: 700;
 }
 .dd-wet .val {
   font-family: var(--rl-font-display);
@@ -697,7 +701,7 @@ h1, h2, h3, h4, h5, h6 {
   font-variant-numeric: tabular-nums;
 }
 .dd-wet-empty {
-  color: rgba(255,255,255,.55);
+  color: var(--rl-fg-on-dark-muted);
   font-family: var(--rl-font-display);
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
   font-weight: 700;
@@ -707,7 +711,7 @@ h1, h2, h3, h4, h5, h6 {
 .dd-season-ranks {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 1px;
   background: rgba(255,255,255,.12);
 }
@@ -718,7 +722,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .dd-season-rank .yr {
   font-family: var(--rl-font-display);
-  font-size: 11px; letter-spacing: 0.18em; color: rgba(255,255,255,.55); font-weight: 700;
+  font-size: 11px; letter-spacing: 0.18em; color: var(--rl-fg-on-dark-muted); font-weight: 700;
 }
 .dd-season-rank .rk {
   font-family: var(--rl-font-display);
@@ -731,30 +735,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 4px;
 }
 
-/* CTA bar */
-.dd-cta-bar {
-  margin-top: 20px;
-  background: #000;
-  padding: 18px 24px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.dd-cta-bar .blurb {
-  color: rgba(255,255,255,.7);
-  font-family: var(--rl-font-display);
-  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-  font-weight: 700;
-}
-.dd-cta-bar .blurb b { color: #fff; }
-.dd-cta {
-  background: var(--team-color); color: #fff;
-  font-family: var(--rl-font-display);
-  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
-  font-weight: 800;
-  padding: 12px 20px;
-  border: none; cursor: pointer;
-}
-.dd-cta:hover { filter: brightness(0.85); }
-
 /* footer */
 .dd-foot {
   padding: 20px 28px 24px;
@@ -763,4 +743,64 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 10px; letter-spacing: 0.22em; color: var(--rl-fg-muted);
   text-transform: uppercase;
   border-top: 1px solid var(--rl-border);
+}
+
+/* =========================================================
+   Driver Details — Responsive
+   Tablet collapse <=1024px; mobile reflow <=640px.
+   ========================================================= */
+@media (max-width: 1024px) {
+  .dd-hero { height: auto; min-height: 460px; }
+  .dd-hero-grid { grid-template-columns: 1fr 360px; grid-template-rows: auto auto; }
+  .dd-hero-slab { width: 100%; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), 0 100%); }
+  .dd-hero-meta { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: end; padding: 16px 28px 24px; }
+  .dd-hero-number { font-size: 140px; }
+  .dd-stats { grid-template-columns: repeat(2, 1fr); }
+  .dd-stat-hero { grid-column: span 2; }
+  .dd-stats-secondary { grid-template-columns: repeat(2, 1fr); }
+  .dd-timeline-row { grid-template-columns: 90px 1fr 60px; }
+  .dd-timeline-row .role { display: none; }
+}
+
+/* Reduced-motion: pause continuous decorative animations.
+   Keeps state-feedback transitions (filter, color) reasonably short. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-breathe,
+  .dd-hero-status .pulse {
+    animation: none !important;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .dd-breadcrumb { flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 20px; }
+  .dd-back { min-height: 44px; padding: 12px 18px; }
+  .dd-hero { min-height: 0; }
+  .dd-hero-grid { grid-template-columns: 1fr; padding-inline: 0; }
+  .dd-hero-id { padding: 24px 20px 12px; gap: 14px; }
+  .dd-hero-name .first { font-size: 22px; }
+  .dd-hero-name .last { font-size: 44px; }
+  .dd-hero-portrait { min-height: 260px; }
+  .dd-hero-meta { padding: 16px 20px 24px; }
+  .dd-hero-number { font-size: 96px; line-height: 0.9; }
+  .dd-hero-footer { height: auto; padding: 10px 0; }
+  .dd-hero-footer .ticks { flex-wrap: wrap; gap: 12px 18px; padding: 0 16px; font-size: 10px; }
+  .dd-section { padding: 36px 20px 24px; }
+  .dd-section + .dd-section { padding-top: 20px; }
+  .dd-section-title { font-size: 16px; gap: 10px; }
+  .dd-stats { grid-template-columns: 1fr; }
+  .dd-stat-hero { grid-column: span 1; }
+  .dd-stat .num { font-size: 44px; }
+  .dd-stat-hero .num { font-size: 64px; }
+  .dd-stats-secondary { grid-template-columns: 1fr 1fr; }
+  .dd-timeline-track { height: 56px; margin: 24px 4px 14px; }
+  .dd-timeline-seg { font-size: 11px; padding: 0 10px; }
+  .dd-timeline-row { grid-template-columns: 80px 1fr auto; padding: 12px 8px; gap: 8px; }
+  .dd-bio { grid-template-columns: 1fr; }
+  .dd-foot { flex-direction: column; gap: 8px; padding: 18px 20px 20px; }
 }

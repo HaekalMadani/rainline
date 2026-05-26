@@ -3,13 +3,12 @@ import { deriveCareer } from "./derive";
 
 interface Props {
     driver: DriverCareerStatsType;
-    teamColor: string;
 }
 
-export default function CareerStats({ driver, teamColor }: Props) {
+export default function CareerStats({ driver }: Props) {
     const career = deriveCareer(driver);
     const seasonsLabel = career.debut_year && career.final_year
-        ? `${career.debut_year}—${career.final_year} · ${driver.total_seasons} SEASONS`
+        ? `${career.debut_year}–${career.final_year} · ${driver.total_seasons} SEASONS`
         : `${driver.total_seasons} SEASONS`;
 
     const winRate = driver.total_seasons > 0 && driver.total_wins > 0
@@ -55,19 +54,19 @@ export default function CareerStats({ driver, teamColor }: Props) {
             </div>
 
             <div className="dd-stats-secondary">
-                <div className="dd-stat-mini" style={{ borderLeftColor: teamColor }}>
+                <div className="dd-stat-mini">
                     <div className="label">Pole Positions</div>
                     <div className="num">{career.poles}</div>
                 </div>
-                <div className="dd-stat-mini" style={{ borderLeftColor: teamColor }}>
+                <div className="dd-stat-mini">
                     <div className="label">Fastest Laps</div>
                     <div className="num">{career.fastest_laps}</div>
                 </div>
-                <div className="dd-stat-mini" style={{ borderLeftColor: teamColor }}>
+                <div className="dd-stat-mini">
                     <div className="label">Career Points</div>
                     <div className="num">{Math.round(driver.total_points).toLocaleString()}</div>
                 </div>
-                <div className="dd-stat-mini" style={{ borderLeftColor: teamColor }}>
+                <div className="dd-stat-mini">
                     <div className="label">DNFs</div>
                     <div className="num">{career.dnfs}</div>
                 </div>

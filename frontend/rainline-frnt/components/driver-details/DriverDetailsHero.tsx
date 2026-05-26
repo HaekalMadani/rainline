@@ -45,7 +45,7 @@ export default function DriverDetailsHero({ driver }: Props) {
                             </div>
                             <div className="dd-hero-team-text">
                                 <div className="dd-hero-team-label">
-                                    Current Team{career.debut_year ? ` · ${career.debut_year}—NOW` : ""}
+                                    Current Team{career.debut_year ? ` · ${career.debut_year}–NOW` : ""}
                                 </div>
                                 <div className="dd-hero-team-name">{team}</div>
                             </div>
