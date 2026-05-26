@@ -1,9 +1,13 @@
 import fastf1 as ff1
 from pathlib import Path
+import json
 import logging
 import numpy as np
 from fastf1.events import Session
 from typing import Optional, List, Dict, Any
+
+APP_DIR = Path(__file__).resolve().parent.parent
+ANALYSIS_DIR = APP_DIR / "analysis_results"
 
 # Setup logging and cache as before
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -156,3 +160,82 @@ class F1Service:
             final_ranking_with_rank.append(driver_data)
 
         return final_ranking_with_rank
+
+    @staticmethod
+    def aggregate_driver_wet_performance(driver_code: str) -> Optional[Dict[str, Any]]:
+        """
+        Cross-season aggregation of pre-computed wet-vs-dry analysis for one driver.
+
+        Reads every analysis_results/{year}.json, picks out the rows for `driver_code`,
+        and produces career totals plus per-season breakdown. Returns None if the
+        driver does not appear in any analysis file.
+        """
+        code = driver_code.upper()
+        per_season: List[Dict[str, Any]] = []
+        all_sessions: List[Dict[str, Any]] = []
+        full_name: Optional[str] = None
+
+        for file in sorted(ANALYSIS_DIR.glob("*.json")):
+            try:
+                season = int(file.stem)
+            except ValueError:
+                continue
+
+            try:
+                with open(file) as f:
+                    payload = json.load(f)
+            except (OSError, json.JSONDecodeError) as e:
+                logging.warning(f"Skipping unreadable analysis file {file}: {e}")
+                continue
+
+            standings = payload.get("standings") if isinstance(payload, dict) else payload
+            if not isinstance(standings, list):
+                continue
+
+            field_size = len(standings)
+            driver_row = next(
+                (row for row in standings if str(row.get("driver_code", "")).upper() == code),
+                None,
+            )
+            if not driver_row:
+                continue
+
+            full_name = full_name or driver_row.get("full_name")
+            sessions = driver_row.get("sessions_analyzed_list") or []
+
+            for sess in sessions:
+                all_sessions.append({
+                    "season": season,
+                    "session_name": sess.get("session_name", ""),
+                    "delta_percentage": sess.get("delta_percentage"),
+                    "wet_compound_used": sess.get("wet_compound_used", ""),
+                })
+
+            per_season.append({
+                "season": season,
+                "team_name": driver_row.get("team_name"),
+                "average_delta": driver_row.get("average_wet_to_dry_delta"),
+                "sessions_analyzed": driver_row.get("sessions_analyzed_count", len(sessions)),
+                "rank": driver_row.get("rank"),
+                "field_size": field_size,
+            })
+
+        if not per_season:
+            return None
+
+        valid_sessions = [s for s in all_sessions if isinstance(s.get("delta_percentage"), (int, float))]
+        deltas = [s["delta_percentage"] for s in valid_sessions]
+        career_avg = round(float(np.mean(deltas)), 2) if deltas else None
+        best_session = min(valid_sessions, key=lambda s: s["delta_percentage"]) if valid_sessions else None
+        worst_session = max(valid_sessions, key=lambda s: s["delta_percentage"]) if valid_sessions else None
+
+        return {
+            "driver_code": code,
+            "full_name": full_name,
+            "seasons_analyzed": len(per_season),
+            "total_sessions": len(valid_sessions),
+            "career_average_delta": career_avg,
+            "best_session": best_session,
+            "worst_session": worst_session,
+            "per_season": per_season,
+        }

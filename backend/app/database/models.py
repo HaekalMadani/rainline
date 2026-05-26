@@ -15,10 +15,28 @@ def init_database():
             full_name TEXT NOT NULL,
             average_position REAL,
             total_seasons INTEGER DEFAULT 0,
+            date_of_birth TEXT,
+            nationality TEXT,
+            country_code TEXT,
+            total_wins INTEGER DEFAULT 0,
+            total_points REAL DEFAULT 0,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
+
+    # Migrate existing drivers tables that pre-date the bio/totals columns
+    cursor.execute("PRAGMA table_info(drivers)")
+    existing_cols = {row[1] for row in cursor.fetchall()}
+    for col, definition in (
+        ("date_of_birth", "TEXT"),
+        ("nationality", "TEXT"),
+        ("country_code", "TEXT"),
+        ("total_wins", "INTEGER DEFAULT 0"),
+        ("total_points", "REAL DEFAULT 0"),
+    ):
+        if col not in existing_cols:
+            cursor.execute(f"ALTER TABLE drivers ADD COLUMN {col} {definition}")
     
     # Team history - tracks which team a driver was with each season
     cursor.execute("""

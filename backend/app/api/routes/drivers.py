@@ -1,13 +1,16 @@
 from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
 from app.schemas.drivers import (
-    DriverCareerStats, 
-    DriverSummary, 
+    DriverCareerStats,
+    DriverSummary,
     DriverHighlight,
-    CreateHighlight
+    CreateHighlight,
+    DriverWetPerformance,
 )
 from app.services.driver_service import DriverService
 from app.services.highlight_service import HighlightService
+from app.services.wet import F1Service
+from app.core.cache import CACHE
 
 router = APIRouter(prefix="/drivers", tags=["drivers"])
 
@@ -28,6 +31,33 @@ def get_driver_career(driver_code: str):
         )
     
     return driver_data
+
+@router.get("/{driver_code}/wet", response_model=DriverWetPerformance)
+def get_driver_wet_performance(driver_code: str):
+    code = driver_code.upper()
+    cache_key = f"wet_{code}"
+
+    if cache_key in CACHE:
+        return CACHE[cache_key]
+
+    if not DriverService.driver_exists(code):
+        raise HTTPException(status_code=404, detail=f"Driver {code} not found")
+
+    result = F1Service.aggregate_driver_wet_performance(code)
+    if result is None:
+        result = {
+            "driver_code": code,
+            "full_name": None,
+            "seasons_analyzed": 0,
+            "total_sessions": 0,
+            "career_average_delta": None,
+            "best_session": None,
+            "worst_session": None,
+            "per_season": [],
+        }
+
+    CACHE[cache_key] = result
+    return result
 
 @router.get("/{driver_code}/highlights", response_model=List[DriverHighlight])
 def get_driver_highlights(

@@ -1,4 +1,5 @@
 import fastf1
+from fastf1.ergast import Ergast
 import sqlite3
 from typing import Dict, Tuple
 import logging
@@ -25,13 +26,52 @@ def get_db_connection():
     return conn
 
 
-def scrape_season(year: int) -> bool:
+def fetch_driver_bio(year: int) -> Dict[str, Dict]:
+    """Look up DOB + nationality for each driver in a season via Ergast.
+    Returns {driver_code: {'date_of_birth': 'YYYY-MM-DD', 'nationality': 'Dutch'}}.
+    Falls back to {} on failure so a missing Ergast response doesn't break scraping."""
+    try:
+        info = Ergast().get_driver_info(season=year)
+        bio: Dict[str, Dict] = {}
+        for _, row in info.iterrows():
+            code = row.get('driverCode')
+            if not code or pd.isna(code):
+                continue
+            dob = row.get('dateOfBirth')
+            bio[code] = {
+                'date_of_birth': dob.strftime('%Y-%m-%d') if pd.notna(dob) and hasattr(dob, 'strftime') else (str(dob) if pd.notna(dob) else None),
+                'nationality': row.get('driverNationality') if pd.notna(row.get('driverNationality')) else None,
+            }
+        logger.info(f"  Fetched bio for {len(bio)} drivers from Ergast")
+        return bio
+    except Exception as e:
+        logger.warning(f"  Could not fetch driver bio from Ergast for {year}: {e}")
+        return {}
+
+
+def season_already_scraped(year: int) -> bool:
+    """True if season_standings already has any row for this year."""
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1 FROM season_standings WHERE season = ? LIMIT 1", (year,))
+        return cursor.fetchone() is not None
+    finally:
+        conn.close()
+
+
+def scrape_season(year: int, force: bool = False) -> bool:
     """
-    Scrape complete season using FastF1 Session API
-    Returns True if successful
+    Scrape complete season using FastF1 Session API.
+    Skips if season_standings already has rows for `year` unless force=True.
+    Returns True if successful (or if skipped — both are non-error outcomes).
     """
+    if not force and season_already_scraped(year):
+        logger.info(f"⏭  Skipping {year} — already scraped (use force=True to re-scrape)")
+        return True
+
     logger.info(f"🏁 Scraping season {year}...")
-    
+
     try:
         # Get the event schedule for the year
         schedule = fastf1.get_event_schedule(year)
@@ -44,7 +84,10 @@ def scrape_season(year: int) -> bool:
         races = schedule[schedule['EventFormat'] != 'testing']
         
         logger.info(f"Found {len(races)} events in {year}")
-        
+
+        # One-shot lookup for DOB/nationality across all drivers in this season
+        driver_bio = fetch_driver_bio(year)
+
         # Dictionary to store driver stats across the season
         driver_stats = {}
         
@@ -73,11 +116,16 @@ def scrape_season(year: int) -> bool:
                     
                     # Initialize driver if not seen before
                     if driver_code not in driver_stats:
+                        country_code = driver_result.get('CountryCode')
+                        bio = driver_bio.get(driver_code, {})
                         driver_stats[driver_code] = {
                             'full_name': driver_result['FullName'],
-                            'team_name': driver_result['TeamName'],  
-                            'current_team': driver_result['TeamName'], 
-                            'driver_number': driver_result.get('DriverNumber'),  # NEW
+                            'team_name': driver_result['TeamName'],
+                            'current_team': driver_result['TeamName'],
+                            'driver_number': driver_result.get('DriverNumber'),
+                            'date_of_birth': bio.get('date_of_birth'),
+                            'nationality': bio.get('nationality'),
+                            'country_code': country_code if pd.notna(country_code) else None,
                             'points': 0,
                             'wins': 0,
                             'podiums': 0,
@@ -187,22 +235,47 @@ def save_season_to_db(year: int, driver_stats: Dict):
             existing = cursor.fetchone()
             
             if existing:
-                # Update existing driver
+                # Update existing driver. COALESCE on bio fields so a re-scrape
+                # of an older season doesn't wipe out info from a newer one.
                 cursor.execute("""
-                    UPDATE drivers 
+                    UPDATE drivers
                     SET full_name = ?,
                         total_seasons = total_seasons + 1,
                         driver_number = ?,
                         current_team = ?,
+                        date_of_birth = COALESCE(?, date_of_birth),
+                        nationality = COALESCE(?, nationality),
+                        country_code = COALESCE(?, country_code),
                         updated_at = CURRENT_TIMESTAMP
                     WHERE driver_code = ?
-                """, (stats['full_name'], stats['driver_number'], stats['current_team'] ,driver_code))
+                """, (
+                    stats['full_name'],
+                    stats['driver_number'],
+                    stats['current_team'],
+                    stats.get('date_of_birth'),
+                    stats.get('nationality'),
+                    stats.get('country_code'),
+                    driver_code,
+                ))
             else:
                 # Insert new driver
                 cursor.execute("""
-                    INSERT INTO drivers (driver_code, full_name, total_seasons, average_position, driver_number, current_team)
-                    VALUES (?, ?, 1, ?, ?, ?)
-                """, (driver_code, stats['full_name'], stats['position']))
+                    INSERT INTO drivers (
+                        driver_code, full_name, total_seasons, average_position,
+                        driver_number, current_team,
+                        date_of_birth, nationality, country_code
+                    )
+                    VALUES (?, ?, 1, ?, ?, ?, ?, ?, ?)
+                """, (
+                    driver_code,
+                    stats['full_name'],
+                    stats['position'],
+                    stats['driver_number'],
+                    stats['current_team'],
+                    stats.get('date_of_birth'),
+                    stats.get('nationality'),
+                    stats.get('country_code'),
+                ))
             
             # Insert team history
             cursor.execute("""
@@ -222,15 +295,25 @@ def save_season_to_db(year: int, driver_stats: Dict):
                 stats['fastest_laps'], stats['dnfs']
             ))
         
-        # Update average positions for all drivers
+        # Recompute career aggregates from season_standings — idempotent.
         cursor.execute("""
             UPDATE drivers
             SET average_position = (
-                SELECT AVG(position)
-                FROM season_standings
-                WHERE season_standings.driver_code = drivers.driver_code
-                AND position IS NOT NULL
-            )
+                    SELECT AVG(position)
+                    FROM season_standings
+                    WHERE season_standings.driver_code = drivers.driver_code
+                    AND position IS NOT NULL
+                ),
+                total_wins = COALESCE((
+                    SELECT SUM(wins)
+                    FROM season_standings
+                    WHERE season_standings.driver_code = drivers.driver_code
+                ), 0),
+                total_points = COALESCE((
+                    SELECT SUM(points)
+                    FROM season_standings
+                    WHERE season_standings.driver_code = drivers.driver_code
+                ), 0)
         """)
         
         conn.commit()
@@ -244,17 +327,17 @@ def save_season_to_db(year: int, driver_stats: Dict):
         conn.close()
 
 
-def scrape_multiple_seasons(start_year: int, end_year: int):
-    """Scrape multiple seasons"""
+def scrape_multiple_seasons(start_year: int, end_year: int, force: bool = False):
+    """Scrape multiple seasons. Skips already-scraped years unless force=True."""
     logger.info(f"🏁 Starting scrape from {start_year} to {end_year}")
-    
+
     success_count = 0
     for year in range(start_year, end_year + 1):
         logger.info(f"\n{'='*50}")
         logger.info(f"Processing {year}")
         logger.info(f"{'='*50}")
-        
-        if scrape_season(year):
+
+        if scrape_season(year, force=force):
             success_count += 1
-    
+
     logger.info(f"\n🎉 Scraping complete! Processed {success_count}/{end_year - start_year + 1} seasons")
