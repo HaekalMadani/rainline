@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from app.api import season
 from app.api.routes import drivers
+from app.api.routes import playground
 from fastapi.middleware.cors import CORSMiddleware
 from app.database.models import init_database
 from app.core.config import settings
@@ -29,6 +30,12 @@ app.include_router(
 
 app.include_router(
     drivers.router,
-    prefix="/api", 
-    tags=["Drivers"]          
+    prefix="/api",
+    tags=["Drivers"]
+)
+
+app.include_router(
+    playground.router,
+    prefix="/api",
+    tags=["Playground"]
 )

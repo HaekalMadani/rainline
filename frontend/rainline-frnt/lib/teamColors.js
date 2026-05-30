@@ -6,6 +6,7 @@ export const teamColors = {
   "Red Bull Racing": "#497fdd",
   "AlphaTauri": "#6999ff",
   "RB": "#6999ff",
+  "Racing Bulls": "#6999ff",
   "Aston Martin": "#2f9670",
   "Alpine": "#00a0f2",
   "Haas F1 Team": "#9c9ea2",

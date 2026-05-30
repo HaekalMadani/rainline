@@ -13,12 +13,15 @@ class DriverService:
         with get_db() as conn:
             cursor = conn.cursor()
             cursor.execute(f"""
-                SELECT driver_code, full_name, average_position, total_seasons,
-                       driver_number, current_team,
-                       date_of_birth, nationality, country_code,
-                       total_wins, total_points
-                FROM drivers
-                ORDER BY {sort_by}
+                SELECT d.driver_code, d.full_name, d.average_position, d.total_seasons,
+                       d.driver_number, d.current_team,
+                       d.date_of_birth, d.nationality, d.country_code,
+                       d.total_wins, d.total_points,
+                       MAX(ss.season) AS last_season
+                FROM drivers d
+                LEFT JOIN season_standings ss ON d.driver_code = ss.driver_code
+                GROUP BY d.driver_code
+                ORDER BY d.{sort_by}
             """)
 
             return [
@@ -34,10 +37,11 @@ class DriverService:
                     country_code=row["country_code"],
                     total_wins=row["total_wins"] or 0,
                     total_points=row["total_points"] or 0,
+                    last_season=row["last_season"],
                 )
                 for row in cursor.fetchall()
             ]
-    
+
     @staticmethod
     def get_driver_by_code(driver_code: str) -> Optional[DriverCareerStats]:
         """Get complete driver data"""
@@ -121,7 +125,8 @@ class DriverService:
                 SELECT d.driver_code, d.full_name, d.average_position, d.total_seasons,
                        d.driver_number, d.current_team,
                        d.date_of_birth, d.nationality, d.country_code,
-                       d.total_wins, d.total_points
+                       d.total_wins, d.total_points,
+                       (SELECT MAX(season) FROM season_standings WHERE driver_code = d.driver_code) AS last_season
                 FROM drivers d
                 JOIN season_standings ss ON d.driver_code = ss.driver_code
                 WHERE ss.season = ?
@@ -141,6 +146,7 @@ class DriverService:
                     country_code=row["country_code"],
                     total_wins=row["total_wins"] or 0,
                     total_points=row["total_points"] or 0,
+                    last_season=row["last_season"],
                 )
                 for row in cursor.fetchall()
             ]
@@ -154,7 +160,8 @@ class DriverService:
                 SELECT DISTINCT d.driver_code, d.full_name, d.average_position, d.total_seasons,
                        d.driver_number, d.current_team,
                        d.date_of_birth, d.nationality, d.country_code,
-                       d.total_wins, d.total_points
+                       d.total_wins, d.total_points,
+                       (SELECT MAX(season) FROM season_standings WHERE driver_code = d.driver_code) AS last_season
                 FROM drivers d
                 JOIN team_history th ON d.driver_code = th.driver_code
                 WHERE th.team_name LIKE ?
@@ -174,6 +181,7 @@ class DriverService:
                     country_code=row["country_code"],
                     total_wins=row["total_wins"] or 0,
                     total_points=row["total_points"] or 0,
+                    last_season=row["last_season"],
                 )
                 for row in cursor.fetchall()
             ]

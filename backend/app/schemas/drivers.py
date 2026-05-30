@@ -45,6 +45,7 @@ class DriverSummary(BaseModel):
     country_code: Optional[str] = None
     total_wins: int = 0
     total_points: float = 0
+    last_season: Optional[int] = None
 
 class CreateHighlight(BaseModel):
     title: str

@@ -10,6 +10,7 @@ export interface DriverCareerType {
     country_code: string | null;
     total_wins: number;
     total_points: number;
+    last_season: number | null;
 }
 
 export interface SeasonStats {

@@ -1,0 +1,242 @@
+{
+  "metadata": {
+    "track": "bahrain",
+    "season": 2024,
+    "derived_at": "2026-05-30T15:05:08Z",
+    "method_version": "1.0",
+    "notes": "Additive plausibility model derived from 2024 qualifying data. Driver deltas via teammate-pair least squares, anchored per-team (each team's average qualifying pace is attributed to the car, the intra-team spread to driver skill) then median-centred \u2014 this per-team anchor replaces the spec's plain global median-centring because the 2024 teammate graph is almost fully disconnected (no cross-team mid-season movers), which otherwise leaves cross-team driver ranking underdetermined. Chassis/engine split assumes zero-mean chassis within each engine group; with the Ferrari group mixing a fast works team and slow customers (Haas, Sauber), the engine delta absorbs the customers' deficit, so customer chassis deltas read better than raw pace suggests. Renault engine delta is hand-assigned (+0.15s, retuned from the spec's illustrative +0.10s so the Mercedes customer engine ranks ahead of it) because Alpine is the only Renault-powered team in 2024. Sector weights are editorial.",
+    "reference_pole_time_seconds": 89.179
+  },
+  "baseline": {
+    "lap_time_seconds": 89.5395,
+    "sector_proportions": [
+      0.32347894353165485,
+      0.426837884820277,
+      0.24968317164806822
+    ]
+  },
+  "sector_weights": {
+    "engine": [
+      0.55,
+      0.15,
+      0.3
+    ],
+    "chassis": [
+      0.2,
+      0.4,
+      0.4
+    ],
+    "driver": [
+      0.25,
+      0.45,
+      0.3
+    ]
+  },
+  "drivers": {
+    "ALB": {
+      "delta": -0.07265888508200273,
+      "sessions": 20,
+      "name": "Alexander Albon",
+      "team_2024": "Williams"
+    },
+    "ALO": {
+      "delta": -0.059505040642907125,
+      "sessions": 23,
+      "name": "Fernando Alonso",
+      "team_2024": "Aston Martin"
+    },
+    "BEA": {
+      "delta": 0.44358030403131254,
+      "sessions": 2,
+      "name": "Oliver Bearman",
+      "team_2024": "Haas F1 Team"
+    },
+    "BOT": {
+      "delta": -0.13418094634874303,
+      "sessions": 22,
+      "name": "Valtteri Bottas",
+      "team_2024": "Kick Sauber"
+    },
+    "COL": {
+      "delta": -0.02205037297055995,
+      "sessions": 8,
+      "name": "Franco Colapinto",
+      "team_2024": "Williams"
+    },
+    "DOO": {
+      "delta": 0.45903862794167233,
+      "sessions": 1,
+      "name": "Jack Doohan",
+      "team_2024": "Alpine"
+    },
+    "GAS": {
+      "delta": -0.13680736737504798,
+      "sessions": 21,
+      "name": "Pierre Gasly",
+      "team_2024": "Alpine"
+    },
+    "HAM": {
+      "delta": 0.150862837765202,
+      "sessions": 22,
+      "name": "Lewis Hamilton",
+      "team_2024": "Mercedes"
+    },
+    "HUL": {
+      "delta": -0.01978098194381277,
+      "sessions": 23,
+      "name": "Nico Hulkenberg",
+      "team_2024": "Haas F1 Team"
+    },
+    "LAW": {
+      "delta": 0.1458492227721531,
+      "sessions": 5,
+      "name": "Liam Lawson",
+      "team_2024": "RB"
+    },
+    "LEC": {
+      "delta": -0.09251471243361398,
+      "sessions": 23,
+      "name": "Charles Leclerc",
+      "team_2024": "Ferrari"
+    },
+    "MAG": {
+      "delta": 0.18528963241368476,
+      "sessions": 22,
+      "name": "Kevin Magnussen",
+      "team_2024": "Haas F1 Team"
+    },
+    "NOR": {
+      "delta": -0.014645812704669907,
+      "sessions": 23,
+      "name": "Lando Norris",
+      "team_2024": "McLaren"
+    },
+    "OCO": {
+      "delta": -0.07396828486181649,
+      "sessions": 20,
+      "name": "Esteban Ocon",
+      "team_2024": "Alpine"
+    },
+    "PER": {
+      "delta": 0.3592923358057569,
+      "sessions": 22,
+      "name": "Sergio Perez",
+      "team_2024": "Red Bull Racing"
+    },
+    "PIA": {
+      "delta": 0.1801544631745418,
+      "sessions": 23,
+      "name": "Oscar Piastri",
+      "team_2024": "McLaren"
+    },
+    "RIC": {
+      "delta": 0.1234645101319967,
+      "sessions": 18,
+      "name": "Daniel Ricciardo",
+      "team_2024": "RB"
+    },
+    "RUS": {
+      "delta": 0.014645812704669917,
+      "sessions": 22,
+      "name": "George Russell",
+      "team_2024": "Mercedes"
+    },
+    "SAI": {
+      "delta": -0.10280261589289058,
+      "sessions": 22,
+      "name": "Carlos Sainz",
+      "team_2024": "Ferrari"
+    },
+    "SAR": {
+      "delta": 0.34297223375737057,
+      "sessions": 12,
+      "name": "Logan Sargeant",
+      "team_2024": "Williams"
+    },
+    "STR": {
+      "delta": 0.22501369111277902,
+      "sessions": 23,
+      "name": "Lance Stroll",
+      "team_2024": "Aston Martin"
+    },
+    "TSU": {
+      "delta": -0.021050757199341956,
+      "sessions": 23,
+      "name": "Yuki Tsunoda",
+      "team_2024": "RB"
+    },
+    "VER": {
+      "delta": -0.19378368533588503,
+      "sessions": 22,
+      "name": "Max Verstappen",
+      "team_2024": "Red Bull Racing"
+    },
+    "ZHO": {
+      "delta": 0.29968959681861496,
+      "sessions": 22,
+      "name": "Guanyu Zhou",
+      "team_2024": "Kick Sauber"
+    }
+  },
+  "chassis": {
+    "redbull": {
+      "delta": -0.2811427981699692,
+      "display_name": "Red Bull"
+    },
+    "rb": {
+      "delta": 0.2811427981699692,
+      "display_name": "RB"
+    },
+    "mercedes": {
+      "delta": -0.1476321903171007,
+      "display_name": "Mercedes"
+    },
+    "mclaren": {
+      "delta": -0.362356743770193,
+      "display_name": "McLaren"
+    },
+    "astonmartin": {
+      "delta": 0.19375912269735807,
+      "display_name": "Aston Martin"
+    },
+    "williams": {
+      "delta": 0.31622981138993567,
+      "display_name": "Williams"
+    },
+    "ferrari": {
+      "delta": -0.3301092128475716,
+      "display_name": "Ferrari"
+    },
+    "haas": {
+      "delta": 0.08641442569006574,
+      "display_name": "Haas"
+    },
+    "sauber": {
+      "delta": 0.24369478715750587,
+      "display_name": "Kick Sauber"
+    },
+    "alpine": {
+      "delta": 0.45308022242438917,
+      "display_name": "Alpine"
+    }
+  },
+  "engines": {
+    "HRC": {
+      "delta": 0.06435389367330326,
+      "manufacturer": "Honda RBPT"
+    },
+    "MER": {
+      "delta": 0.11000469215427773,
+      "manufacturer": "Mercedes"
+    },
+    "FER": {
+      "delta": 0.3453062359609607,
+      "manufacturer": "Ferrari"
+    },
+    "REN": {
+      "delta": 0.15,
+      "manufacturer": "Renault",
+      "note": "Hand-assigned. Renault powers only Alpine in 2024, so the data cannot separate engine from chassis. The +0.10s reflects general consensus."
+    }
+  }
+}

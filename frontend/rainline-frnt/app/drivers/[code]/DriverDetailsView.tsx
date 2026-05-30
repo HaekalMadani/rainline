@@ -46,7 +46,7 @@ export default function DriverDetailsView({ code }: { code: string }) {
             className="dd-page font-orbitron"
             style={{ ["--team-color" as string]: teamColor } as React.CSSProperties}
         >
-            <div className="dd-breadcrumb">
+            {/* <div className="dd-breadcrumb">
                 <div className="dd-breadcrumb-trail">
                     <span>Drivers</span>
                     <span>›</span>
@@ -62,7 +62,7 @@ export default function DriverDetailsView({ code }: { code: string }) {
                         Back to Grid
                     </button>
                 </Link>
-            </div>
+            </div> */}
 
             <DriverDetailsHero driver={driver} />
             <CareerStats driver={driver} />
