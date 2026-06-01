@@ -421,7 +421,11 @@ def assemble_coefficients(year, baseline, proportions, reference_pole,
         if slug is None:
             logger.warning(f"No chassis slug for team '{team}' — skipping")
             continue
-        chassis_out[slug] = {"delta": delta, "display_name": TEAM_DISPLAY_NAME.get(team, team)}
+        chassis_out[slug] = {
+            "delta": delta,
+            "display_name": TEAM_DISPLAY_NAME.get(team, team),
+            "engine": TEAM_ENGINE_2024.get(team),  # real 2024 engine — lets the UI default to real pairings
+        }
 
     engines_out = {}
     for code, delta in engines.items():

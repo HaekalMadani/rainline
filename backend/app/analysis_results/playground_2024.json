@@ -2,7 +2,7 @@
   "metadata": {
     "track": "bahrain",
     "season": 2024,
-    "derived_at": "2026-05-30T15:05:08Z",
+    "derived_at": "2026-05-30T15:48:32Z",
     "method_version": "1.0",
     "notes": "Additive plausibility model derived from 2024 qualifying data. Driver deltas via teammate-pair least squares, anchored per-team (each team's average qualifying pace is attributed to the car, the intra-team spread to driver skill) then median-centred \u2014 this per-team anchor replaces the spec's plain global median-centring because the 2024 teammate graph is almost fully disconnected (no cross-team mid-season movers), which otherwise leaves cross-team driver ranking underdetermined. Chassis/engine split assumes zero-mean chassis within each engine group; with the Ferrari group mixing a fast works team and slow customers (Haas, Sauber), the engine delta absorbs the customers' deficit, so customer chassis deltas read better than raw pace suggests. Renault engine delta is hand-assigned (+0.15s, retuned from the spec's illustrative +0.10s so the Mercedes customer engine ranks ahead of it) because Alpine is the only Renault-powered team in 2024. Sector weights are editorial.",
     "reference_pole_time_seconds": 89.179
@@ -181,43 +181,53 @@
   "chassis": {
     "redbull": {
       "delta": -0.2811427981699692,
-      "display_name": "Red Bull"
+      "display_name": "Red Bull",
+      "engine": "HRC"
     },
     "rb": {
       "delta": 0.2811427981699692,
-      "display_name": "RB"
+      "display_name": "RB",
+      "engine": "HRC"
     },
     "mercedes": {
       "delta": -0.1476321903171007,
-      "display_name": "Mercedes"
+      "display_name": "Mercedes",
+      "engine": "MER"
     },
     "mclaren": {
       "delta": -0.362356743770193,
-      "display_name": "McLaren"
+      "display_name": "McLaren",
+      "engine": "MER"
     },
     "astonmartin": {
       "delta": 0.19375912269735807,
-      "display_name": "Aston Martin"
+      "display_name": "Aston Martin",
+      "engine": "MER"
     },
     "williams": {
       "delta": 0.31622981138993567,
-      "display_name": "Williams"
+      "display_name": "Williams",
+      "engine": "MER"
     },
     "ferrari": {
       "delta": -0.3301092128475716,
-      "display_name": "Ferrari"
+      "display_name": "Ferrari",
+      "engine": "FER"
     },
     "haas": {
       "delta": 0.08641442569006574,
-      "display_name": "Haas"
+      "display_name": "Haas",
+      "engine": "FER"
     },
     "sauber": {
       "delta": 0.24369478715750587,
-      "display_name": "Kick Sauber"
+      "display_name": "Kick Sauber",
+      "engine": "FER"
     },
     "alpine": {
       "delta": 0.45308022242438917,
-      "display_name": "Alpine"
+      "display_name": "Alpine",
+      "engine": "REN"
     }
   },
   "engines": {

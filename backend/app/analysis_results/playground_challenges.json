@@ -1,0 +1,19 @@
+[
+  {
+    "id": "alonso-question",
+    "name": "The Alonso Question",
+    "description": "Fernando Alonso is locked in. Build him the car he deserves and see how fast he can go.",
+    "locked": { "driver": "ALO" },
+    "target_lap_time_seconds": 89.5,
+    "pass_criterion": "beat"
+  },
+  {
+    "id": "anyone-but-verstappen",
+    "name": "Anyone But Verstappen",
+    "description": "The Red Bull is sitting in the garage. Pick any driver except Verstappen. Can you match his real 2024 Bahrain pace?",
+    "locked": { "chassis": "redbull", "engine": "HRC" },
+    "target_lap_time_seconds": 89.179,
+    "pass_criterion": "match",
+    "match_tolerance_seconds": 0.15
+  }
+]

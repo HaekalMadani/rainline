@@ -30,6 +30,11 @@ def get_choices():
         raise HTTPException(status_code=503, detail="Playground coefficients are not available.")
 
 
+@router.get("/challenges")
+def get_challenges():
+    return PlaygroundService.list_challenges()
+
+
 @router.get("/methodology")
 def get_methodology():
     try:

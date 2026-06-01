@@ -1,6 +1,24 @@
 # Playground: Math & Data Spec
 
-Status: Spec, pre-implementation. Backend / data scope only. Frontend implementation is out of scope for this document and will be specified separately.
+Status: **Implemented (backend / data scope).** The derivation script, coefficient JSON, runtime service, and endpoints are built and verified end-to-end. Frontend page remains out of scope (not built). The original design text below is preserved as written; where the shipped code differs, the **Implementation Status & Deviations** section immediately below is authoritative.
+
+## Implementation Status & Deviations (as built, 2026-05)
+
+Backend shipped and verified; **9 of the 10 §9 sanity checks pass**. Where the implementation departs from the design text below, the code wins. Deltas:
+
+| Topic | Spec said | As built | Why |
+| --- | --- | --- | --- |
+| **Chassis keys** (§3.3, §8, §11) | snake_case `redbull` | compact CSS-prop slugs: `redbull`, `mclaren`, `ferrari`, `mercedes`, `astonmartin`, `alpine`, `haas`, `sauber`, `williams`, `rb` | `lib/teamColors.js` keys by full team name and the `--team-*` CSS props use the compact no-underscore form; `redbull` exists nowhere. Keys now map 1:1 to `--team-{key}`. |
+| **Driver delta re-centring** (§4.2.2, §5 #4) | global median-centre after lstsq | **per-team** centre (car-pace anchor) → then global median-centre | The 2024 teammate graph is ~fully disconnected (only Bearman bridges two teams), so global min-norm centring distorted cross-team ranking by component size — it ranked SAI/LEC above Verstappen. Per-team centring attributes each team's average pace to the car and the intra-team spread to the driver; VER is now correctly fastest (−0.194s). |
+| **Renault engine delta** (§4.4.2, §5 #6, §8) | `+0.10s` | `+0.15s` | Retuned so the Mercedes customer engine (data-derived ≈ +0.11s) ranks ahead of Renault (§9 check #6). Still "lagged without being catastrophic"; Alpine stays the worst chassis. |
+| **Wet-session exclusion** (§4.2.4, §6.1) | FastF1 weather, hand-list as fallback | hand-curated list is **authoritative** (only Brazil/São Paulo excluded); FastF1 weather is advisory-only | FastF1's `Rainfall` series false-flagged 5–6 dry 2024 qualis (Australia, Britain, Hungary, …). The spec anticipated this ("Brazil is the notable one"). |
+| **§9 check #3** | Sauber chassis worst/2nd-worst | **not met** — Sauber is 4th-worst chassis | Artifact of the §4.4.1 zero-mean-engine-group assumption: the Ferrari group mixes a fast works team with slow customers (Haas, Sauber), so the FER engine delta absorbs the customers' deficit and flatters their chassis. A clean fix needs a second hand-assigned engine (Ferrari) — deliberately not done. Every other §9 check passes. |
+| **Methodology endpoint** (§11.3, "optional") | nice-to-have | **implemented** (`GET /api/playground/methodology`) | Cheap; serves `metadata` + a human-readable description. |
+| **Service JSON path** (§11.2) | via `core.config.ANALYSIS_DIR` | anchored to the service file (`APP_DIR/analysis_results`), mirroring `wet.py` | `core.config.ANALYSIS_DIR` is CWD-relative and fragile. |
+
+**Actual derived headline values** (in `analysis_results/playground_2024.json`; the §3.3 worked example below uses different *illustrative* numbers): baseline (median Bahrain Q3) = **89.540s**, reference pole = **89.179s**, sector proportions = **[0.323, 0.427, 0.250]**, **24** eligible drivers (incl. low-sample mid-season subs, e.g. DOO = 1 session), fastest driver **VER (−0.194s)**.
+
+Code: `backend/app/scripts/derive_playground_coefficients.py`, `backend/app/services/playground_service.py`, `backend/app/api/routes/playground.py`. See also `CLAUDE.md` → Notes → Playground.
 
 ## 1. Overview
 
@@ -70,7 +88,7 @@ To make the math concrete. Suppose the coefficient bundle has:
 baseline_lap_time            = 90.300 s
 sector_proportions           = [0.305, 0.348, 0.347]
 driver["LEC"].delta          = -0.22 s
-chassis["red_bull"].delta    = -0.18 s
+chassis["redbull"].delta    = -0.18 s
 engine["mercedes"].delta     = -0.05 s
 ```
 
@@ -141,7 +159,7 @@ This system is rank-deficient by one (adding a constant to all skills produces a
 
 Solve via `numpy.linalg.lstsq`. The result is a global skill rating for every driver in the system.
 
-**Re-centring:** after solving, subtract the median rating from every driver. This makes the median driver exactly zero, which matches the intuition that the baseline lap time represents the median driver. (The `sum=0` anchor and median centering aren't equivalent; the second is preferred for interpretation.)
+**Re-centring:** after solving, subtract the median rating from every driver. This makes the median driver exactly zero, which matches the intuition that the baseline lap time represents the median driver. (The `sum=0` anchor and median centering aren't equivalent; the second is preferred for interpretation.) **As built:** this median centring is *preceded* by a per-team centring step (each team's drivers centred to zero mean — the car-pace anchor), because the 2024 teammate graph is almost fully disconnected and global centring alone left cross-team ranking underdetermined. See the Implementation Status header.
 
 **Unit conversion:** multiply each rating by `baseline_lap_time` to get the per-driver delta in seconds. Store this in the JSON.
 
@@ -229,13 +247,13 @@ This means within an engine family, chassis deltas describe how each team's chas
 Alpine is the only Renault-powered team in 2024, so the engine vs chassis level can't be separated from the data. Hand-assign:
 
 ```
-engine_delta[REN]   = +0.10 s   # editorial estimate, documented
+engine_delta[REN]   = +0.15 s   # editorial estimate, documented (as built; retuned from +0.10)
 chassis_delta[ALP]  = car_pace[ALP] - engine_delta[REN]
 ```
 
-The `+0.10` reflects general consensus that the Renault PU lagged the field in 2024 without being catastrophic. This is the only hand-assigned coefficient in the model and must be flagged in the JSON metadata and in the UI methodology panel.
+The `+0.15` (as built; retuned from an initial `+0.10`) reflects general consensus that the Renault PU lagged the field in 2024 without being catastrophic, and places Renault just behind the Mercedes customer engine. This is the only hand-assigned coefficient in the model and must be flagged in the JSON metadata and in the UI methodology panel.
 
-If Alpine's car_pace turns out to be (say) +0.18s, this assignment gives them chassis +0.08s (slightly below-average chassis) and engine +0.10s (notable engine deficit). If car_pace is closer to zero, Alpine ends up with an above-average chassis and a below-average engine. Both stories are plausible; the assignment encodes our preferred narrative explicitly.
+If Alpine's car_pace turns out to be (say) +0.18s, this assignment gives them chassis +0.03s (around-average chassis) and engine +0.15s (notable engine deficit). If car_pace is closer to zero, Alpine ends up with an above-average chassis and a below-average engine. Both stories are plausible; the assignment encodes our preferred narrative explicitly.
 
 ### 4.5 Notes on what the model intentionally cannot capture
 
@@ -255,9 +273,9 @@ The following choices are settled. Changing them requires reopening this spec.
 | 1 | Baseline lap time              | Median best Q3 time, 2024 Bahrain qualifying                                          |
 | 2 | Sector proportions             | From 2024 Bahrain pole lap                                                            |
 | 3 | Sector weights per component   | Hand-tuned values in § 3.2                                                            |
-| 4 | Driver delta normalisation     | Re-centre on median = 0 after lstsq solve                                             |
+| 4 | Driver delta normalisation     | Per-team centre (car-pace anchor) then median = 0 — as built (was: median only)                                             |
 | 5 | Driver delta units             | Stored in seconds (raw lstsq output multiplied by `baseline_lap_time`)                |
-| 6 | Renault engine                 | Hand-assigned `+0.10s`, flagged in JSON and UI                                        |
+| 6 | Renault engine                 | Hand-assigned `+0.15s` (as built; was `+0.10s`), flagged in JSON and UI                                        |
 | 7 | Rookie / no-2024-data drivers  | Excluded from v1 playground                                                           |
 | 8 | Drivers with 2024 obs but none eligible | Excluded from v1 playground                                                  |
 | 9 | Mid-season driver swap drivers | Included, with reduced session count surfaced                                         |
@@ -365,7 +383,7 @@ Schema (informative TypeScript-style; the file is plain JSON):
     // ... one entry per playground-eligible driver
   },
   "chassis": {
-    "red_bull":     { "delta": -0.18, "display_name": "Red Bull" },
+    "redbull":     { "delta": -0.18, "display_name": "Red Bull" },
     "mclaren":      { "delta": -0.21, "display_name": "McLaren" },
     // ... one entry per 2024 team
   },
@@ -373,7 +391,7 @@ Schema (informative TypeScript-style; the file is plain JSON):
     "HRC": { "delta": -0.12, "manufacturer": "Honda RBPT" },
     "MER": { "delta": -0.05, "manufacturer": "Mercedes" },
     "FER": { "delta":  0.02, "manufacturer": "Ferrari" },
-    "REN": { "delta":  0.10, "manufacturer": "Renault", "note": "Hand-assigned. Renault powers only Alpine in 2024, so the data cannot separate engine from chassis. The +0.10s reflects general consensus." }
+    "REN": { "delta":  0.15, "manufacturer": "Renault", "note": "Hand-assigned. Renault powers only Alpine in 2024, so the data cannot separate engine from chassis. The +0.15s reflects general consensus." }   // as built; spec originally illustrated +0.10
   }
 }
 ```
@@ -381,7 +399,7 @@ Schema (informative TypeScript-style; the file is plain JSON):
 **Identifier conventions:**
 
 - **Driver code:** 3-letter uppercase abbreviation (`VER`, `LEC`). Matches the existing convention used throughout the codebase (e.g., `/api/drivers/{code}` route and `useDriver` hook).
-- **Chassis key:** lowercase snake-style slug matching the existing team-color convention in `lib/teamColors.js` and the CSS custom props (`--team-redbull`, `--team-mclaren`, etc.). The derivation script should normalise FastF1's `TeamName` strings to these keys via a lookup table; the same lookup is reused by the runtime API.
+- **Chassis key:** compact lowercase slug matching the `--team-*` CSS custom props (`--team-redbull`, `--team-mclaren`, etc.) — the team name lowercased with separators removed (`redbull`, `astonmartin`, `rb`, `sauber`), **not** snake_case. Note: `lib/teamColors.js` itself keys by full team name (`"Red Bull Racing"`); the slugs here match the CSS props, not the JS object keys. The derivation script normalises FastF1's `TeamName` strings to these slugs via the `TEAM_SLUG_BY_FASTF1_NAME` lookup; the same slugs key the `chassis` dict the runtime API serves.
 - **Engine key:** 3-letter uppercase code as listed in § 6.2. New convention introduced by this feature; document inline.
 
 ## 9. Sanity Checks
@@ -483,7 +501,7 @@ Mounted alongside the existing routes (`api/season.py`, `api/routes/drivers.py`)
   "components": {
     "baseline_seconds": 90.300,
     "driver":  { "code": "LEC", "delta": -0.22, "sessions": 24 },
-    "chassis": { "key": "red_bull", "display_name": "Red Bull", "delta": -0.18 },
+    "chassis": { "key": "redbull", "display_name": "Red Bull", "delta": -0.18 },
     "engine":  { "code": "MER", "manufacturer": "Mercedes", "delta": -0.05 }
   },
   "comparisons": {
@@ -533,7 +551,7 @@ class PlaygroundService:
 {
   "year": 2024,
   "drivers": [{ "code": "VER", "name": "Max Verstappen", "team_2024": "Red Bull Racing" }, ...],
-  "chassis": [{ "key": "red_bull", "display_name": "Red Bull" }, ...],
+  "chassis": [{ "key": "redbull", "display_name": "Red Bull" }, ...],
   "engines": [{ "code": "HRC", "manufacturer": "Honda RBPT" }, ...]
 }
 ```
@@ -642,6 +660,6 @@ For the implementer.
 
 - [ ] `uvicorn app.main:app --reload` starts cleanly.
 - [ ] `curl 'localhost:8000/api/playground/choices'` returns the eligible lists.
-- [ ] `curl 'localhost:8000/api/playground/lap?driver=LEC&chassis=red_bull&engine=MER'` returns a plausible lap time around 1:29-1:31.
+- [ ] `curl 'localhost:8000/api/playground/lap?driver=LEC&chassis=redbull&engine=MER'` returns a plausible lap time around 1:29-1:31.
 - [ ] Sanity-check the worked example (§ 3.3) against the live endpoint.
 - [ ] Invalid identifiers return 400, not 500.

@@ -7,6 +7,7 @@ import TeamPlate from "@/components/TeamPlate"
 import { useMemo, useState } from "react"
 import { teamColors } from "@/lib/teamColors"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Home() {
     const { data, error, isLoading } = useDriverStat()
@@ -50,6 +51,11 @@ export default function Home() {
 
     return (
         <div className="flex flex-col min-h-screen bg-[var(--rl-bg-app)]">
+            <div className="flex justify-end px-4 py-2">
+                <Link href="/playground" className="text-sm font-bold uppercase tracking-wide text-black underline">
+                    Playground →
+                </Link>
+            </div>
             <div className="sticky top-10 z-50">
                 <DriverBanner displayDriver={activeDriver} />
             </div>

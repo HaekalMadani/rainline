@@ -114,7 +114,7 @@ class PlaygroundService:
             key=lambda x: bundle["drivers"][x["code"]]["delta"],
         )
         chassis = sorted(
-            ({"key": key, "display_name": v.get("display_name")}
+            ({"key": key, "display_name": v.get("display_name"), "engine": v.get("engine")}
              for key, v in bundle["chassis"].items()),
             key=lambda x: bundle["chassis"][x["key"]]["delta"],
         )
@@ -127,6 +127,22 @@ class PlaygroundService:
         result = {"year": year, "drivers": drivers, "chassis": chassis, "engines": engines}
         CACHE[cache_key] = result
         return result
+
+    @staticmethod
+    def list_challenges() -> Any:
+        """Return the challenge list (spec §10.1). Static JSON, cached. Empty list if absent."""
+        cache_key = "playground_challenges"
+        if cache_key in CACHE:
+            return CACHE[cache_key]
+
+        path = ANALYSIS_DIR / "playground_challenges.json"
+        challenges = []
+        if path.exists():
+            with open(path) as f:
+                challenges = json.load(f)
+
+        CACHE[cache_key] = challenges
+        return challenges
 
     @staticmethod
     def get_methodology(year: int = DEFAULT_YEAR) -> Dict[str, Any]:
